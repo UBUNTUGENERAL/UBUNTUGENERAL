@@ -3,13 +3,13 @@ const config = [
     title: 'I sold an NFT, where’s my BNB?',
     description: [
       'Trades are settled in WBNB, which is a wrapped version of BNB used on Binance Smart Chain. That means that when you sell an item, WBNB is sent to your wallet instead of BNB.',
-      'You can instantly swap your WBNB for BNB with no trading fees on PancakeSwap.',
+      'You can instantly swap your WBNB for BNB with no trading fees on UbuntuSwap.',
     ],
   },
   {
     title: 'When can I trade other NFT Collections?',
     description: [
-      'Soon! The current NFT Market is a basic version (phase 1), with early access to trading PancakeSwap NFTs only.',
+      'Soon! The current NFT Market is a basic version (phase 1), with early access to trading UbuntuSwap NFTs only.',
       'Other collections will be coming soon. We’ll make an announcement soon about the launch of the V2 Market.',
     ],
   },
@@ -23,7 +23,7 @@ const config = [
   {
     title: 'What are the fees?',
     description: [
-      '100% of all platform fees taken by PancakeSwap from sales are used to buy back and BURN CAKE tokens in our weekly CAKE burns.',
+      '100% of all platform fees taken by UbuntuSwap from sales are used to buy back and BURN CAKE tokens in our weekly CAKE burns.',
       'Platform fees: 2% is subtracted from NFT sales on the market. Subject to change.Collection fees: Additional fees may be taken by collection creators, once those collections are live. These will not contribute to the CAKE burns.',
     ],
   },

@@ -89,10 +89,12 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
       {
         label: t('BUY PRESALE'),
         href: 'https://ico.ubuntutokens.com/register',
+        type: DropdownMenuItemType.EXTERNAL_LINK,
       },
       {
         label: t('CLAIM AIRDROP'),
         href: 'https://docs.google.com/forms/d/e/1FAIpQLSfrzIyxyikH6srI5vOctqehYvHkOJCSbj4Csao9HQYYwtpe5Q/viewform',
+        type: DropdownMenuItemType.EXTERNAL_LINK,
       },
       // {
       //   type: DropdownMenuItemType.DIVIDER,

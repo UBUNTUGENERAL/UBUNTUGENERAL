@@ -26,7 +26,7 @@ export const swapSectionData: SalesSectionProps = {
 
 export const earnSectionData: SalesSectionProps = {
   headingText: 'Earn passive income with crypto.',
-  bodyText: 'PancakeSwap makes it easy to make your crypto work for you.',
+  bodyText: 'UbuntuSwap makes it easy to make your crypto work for you.',
   reverse: true,
   primaryButton: {
     to: '/farms',
