@@ -32,6 +32,7 @@ const deserializeFarm = (farm: SerializedFarm): DeserializedFarm => {
     isCommunity,
     quoteTokenPriceBusd,
     tokenPriceBusd,
+    isTokenOnly: farm.isTokenOnly,
     token: deserializeToken(farm.token),
     quoteToken: deserializeToken(farm.quoteToken),
     userData: deserializeFarmUserData(farm),
@@ -82,7 +83,7 @@ export const usePollCoreFarmData = () => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync([251, 252]))
+    dispatch(fetchFarmsPublicDataAsync([0, 11]))
   }, [dispatch, fastRefresh])
 }
 
@@ -129,6 +130,10 @@ export const useLpTokenPrice = (symbol: string) => {
   const farmTokenPriceInUsd = useBusdPriceFromPid(farm.pid)
   let lpTokenPrice = BIG_ZERO
 
+  if(farm.isTokenOnly){
+    return farmTokenPriceInUsd
+  }
+
   if (farm.lpTotalSupply.gt(0) && farm.lpTotalInQuoteToken.gt(0)) {
     // Total value of base token in LP
     const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(farm.tokenAmountTotal)
@@ -145,7 +150,7 @@ export const useLpTokenPrice = (symbol: string) => {
 // /!\ Deprecated , use the BUSD hook in /hooks
 
 export const usePriceCakeBusd = (): BigNumber => {
-  const cakeBnbFarm = useFarmFromPid(251)
+  const cakeBnbFarm = useFarmFromPid(0)
 
   const cakePriceBusdAsString = cakeBnbFarm.tokenPriceBusd
 

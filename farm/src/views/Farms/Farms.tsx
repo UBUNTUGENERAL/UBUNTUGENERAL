@@ -101,6 +101,8 @@ const StyledImage = styled(Image)`
   margin-right: auto;
   margin-top: 58px;
 `
+
+
 const NUMBER_OF_FARMS_VISIBLE = 12
 
 const getDisplayApr = (cakeRewardsApr?: number, lpRewardsApr?: number) => {
@@ -113,7 +115,10 @@ const getDisplayApr = (cakeRewardsApr?: number, lpRewardsApr?: number) => {
   return null
 }
 
-const Farms: React.FC = () => {
+export interface FarmsProps {
+  tokenMode?: boolean
+}
+const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const { path } = useRouteMatch()
   const { pathname } = useLocation()
   const { t } = useTranslation()
@@ -125,6 +130,7 @@ const Farms: React.FC = () => {
   const [sortOption, setSortOption] = useState('hot')
   const { observerRef, isIntersecting } = useIntersectionObserver()
   const chosenFarmsLength = useRef(0)
+  const {tokenMode } = farmsProps;
 
   const isArchived = pathname.includes('archived')
   const isInactive = pathname.includes('history')
@@ -138,8 +144,8 @@ const Farms: React.FC = () => {
 
   const [stakedOnly, setStakedOnly] = useUserFarmStakedOnly(isActive)
 
-  const activeFarms = farmsLP.filter((farm) => farm.pid !== 0 && farm.multiplier !== '0X' && !isArchivedPid(farm.pid))
-  const inactiveFarms = farmsLP.filter((farm) => farm.pid !== 0 && farm.multiplier === '0X' && !isArchivedPid(farm.pid))
+  const activeFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X' && !isArchivedPid(farm.pid))
+  const inactiveFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier === '0X' && !isArchivedPid(farm.pid))
   const archivedFarms = farmsLP.filter((farm) => isArchivedPid(farm.pid))
 
   const stakedOnlyFarms = activeFarms.filter(
@@ -274,6 +280,7 @@ const Farms: React.FC = () => {
         pid: farm.pid,
         token: farm.token,
         quoteToken: farm.quoteToken,
+        isTokenOnly: farm.isTokenOnly,
       },
       earned: {
         earnings: getBalanceNumber(new BigNumber(farm.userData.earnings)),
@@ -371,19 +378,19 @@ const Farms: React.FC = () => {
     <>
       <PageHeader>
         <Heading as="h1" scale="xxl" color="secondary" mb="24px">
-          {t('Farms')}
+        {tokenMode ? t('Pools') : t('Farms')}
         </Heading>
         <Heading scale="lg" color="text">
-          {t('Stake LP tokens to earn.')}
+        {tokenMode ? t('Stake some tokens to earn.') : t('Stake LP tokens to earn.')}
         </Heading>
-        <NavLink exact activeClassName="active" to="/farms/auction" id="lottery-pot-banner">
+        {/* <NavLink exact activeClassName="active" to="/farms/auction" id="lottery-pot-banner">
           <Button p="0" variant="text">
             <Text color="primary" bold fontSize="16px" mr="4px">
               {t('Community Auctions')}
             </Text>
             <ArrowForwardIcon color="primary" />
           </Button>
-        </NavLink>
+        </NavLink> */}
       </PageHeader>
       <Page>
         <ControlContainer>

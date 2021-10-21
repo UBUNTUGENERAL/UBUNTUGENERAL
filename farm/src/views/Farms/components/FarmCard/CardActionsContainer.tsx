@@ -31,8 +31,9 @@ interface FarmCardActionsProps {
 const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidityUrl, cakePrice, lpLabel }) => {
   const { t } = useTranslation()
   const [requestedApproval, setRequestedApproval] = useState(false)
-  const { pid, lpAddresses } = farm
+  const { pid, lpAddresses, token, isTokenOnly } = farm
   const { allowance, tokenBalance, stakedBalance, earnings } = farm.userData || {}
+  const address = isTokenOnly ? token.address : lpAddresses;
   const lpAddress = getAddress(lpAddresses)
   const isApproved = account && allowance && allowance.isGreaterThan(0)
   const dispatch = useAppDispatch()

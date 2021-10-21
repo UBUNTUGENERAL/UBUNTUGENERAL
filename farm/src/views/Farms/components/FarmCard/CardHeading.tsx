@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Tag, Flex, Heading, Skeleton } from '@pancakeswap/uikit'
+import { Tag, Flex, Heading, Skeleton, Image } from '@pancakeswap/uikit'
 import { Token } from '@pancakeswap/sdk'
 import { CommunityTag, CoreTag } from 'components/Tags'
 import { TokenPairImage } from 'components/TokenImage'
@@ -11,6 +11,7 @@ export interface ExpandableSectionProps {
   isCommunityFarm?: boolean
   token: Token
   quoteToken: Token
+  isTokenOnly?: boolean
 }
 
 const Wrapper = styled(Flex)`
@@ -23,10 +24,21 @@ const MultiplierTag = styled(Tag)`
   margin-left: 4px;
 `
 
-const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, isCommunityFarm, token, quoteToken }) => {
+const CardHeading: React.FC<ExpandableSectionProps> = ({ lpLabel, multiplier, isCommunityFarm, token, quoteToken, isTokenOnly }) => {
+  let image = `/images/tokens/${token.address}.svg`
+  if(isTokenOnly) {
+    image = `/images/tokens/${token.address}.png`
+  }
+
   return (
-    <Wrapper justifyContent="space-between" alignItems="center" mb="12px">
-      <TokenPairImage variant="inverted" primaryToken={token} secondaryToken={quoteToken} width={64} height={64} />
+      <Wrapper justifyContent="space-between" alignItems="center" mb="12px">
+        {
+            isTokenOnly ? 
+            <Image src={image} width={64} height={64} alt="Token Image" /> : 
+            <TokenPairImage variant="inverted" primaryToken={token} secondaryToken={quoteToken} width={64} height={64} />
+            }
+      {/* <TokenPairImage variant="inverted" primaryToken={token} secondaryToken={quoteToken} width={64} height={64} /> */}
+      
       <Flex flexDirection="column" alignItems="flex-end">
         <Heading mb="4px">{lpLabel.split(' ')[0]}</Heading>
         <Flex justifyContent="center">

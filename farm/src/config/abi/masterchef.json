@@ -2,13 +2,8 @@
   {
     "inputs": [
       {
-        "internalType": "contract CakeToken",
-        "name": "_cake",
-        "type": "address"
-      },
-      {
-        "internalType": "contract SyrupBar",
-        "name": "_syrup",
+        "internalType": "contract UBUNTU",
+        "name": "_ubuntu",
         "type": "address"
       },
       {
@@ -17,8 +12,13 @@
         "type": "address"
       },
       {
+        "internalType": "address",
+        "name": "_feeAddress",
+        "type": "address"
+      },
+      {
         "internalType": "uint256",
-        "name": "_cakePerBlock",
+        "name": "_ubuntuPerBlock",
         "type": "uint256"
       },
       {
@@ -150,6 +150,16 @@
         "type": "address"
       },
       {
+        "internalType": "uint16",
+        "name": "_depositFeeBP",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_withdrawFeeBP",
+        "type": "uint16"
+      },
+      {
         "internalType": "bool",
         "name": "_withUpdate",
         "type": "bool"
@@ -158,32 +168,6 @@
     "name": "add",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "cake",
-    "outputs": [
-      {
-        "internalType": "contract CakeToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "cakePerBlock",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -218,19 +202,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "devaddr",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -239,19 +210,6 @@
       }
     ],
     "name": "emergencyWithdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "enterStaking",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -277,20 +235,7 @@
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "leaveStaking",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "pure",
     "type": "function"
   },
   {
@@ -298,32 +243,6 @@
     "name": "massUpdatePools",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_pid",
-        "type": "uint256"
-      }
-    ],
-    "name": "migrate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "migrator",
-    "outputs": [
-      {
-        "internalType": "contract IMigratorChef",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -352,7 +271,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingCake",
+    "name": "pendingubuntu",
     "outputs": [
       {
         "internalType": "uint256",
@@ -390,8 +309,18 @@
       },
       {
         "internalType": "uint256",
-        "name": "accCakePerShare",
+        "name": "accubuntuPerShare",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint16",
+        "name": "depositFeeBP",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "withdrawFeeBP",
+        "type": "uint16"
       }
     ],
     "stateMutability": "view",
@@ -430,6 +359,16 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint16",
+        "name": "_depositFeeBP",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_withdrawFeeBP",
+        "type": "uint16"
+      },
+      {
         "internalType": "bool",
         "name": "_withUpdate",
         "type": "bool"
@@ -443,12 +382,25 @@
   {
     "inputs": [
       {
-        "internalType": "contract IMigratorChef",
-        "name": "_migrator",
+        "internalType": "address",
+        "name": "_feeAddress",
         "type": "address"
       }
     ],
-    "name": "setMigrator",
+    "name": "setFeeAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_block",
+        "type": "uint256"
+      }
+    ],
+    "name": "setStartBlock",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -468,12 +420,12 @@
   },
   {
     "inputs": [],
-    "name": "syrup",
+    "name": "totalAllocPoint",
     "outputs": [
       {
-        "internalType": "contract SyrupBar",
+        "internalType": "uint256",
         "name": "",
-        "type": "address"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -481,7 +433,7 @@
   },
   {
     "inputs": [],
-    "name": "totalAllocPoint",
+    "name": "totalStakedAmount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -506,14 +458,40 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "ubuntu",
+    "outputs": [
+      {
+        "internalType": "contract UBUNTU",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ubuntuPerBlock",
+    "outputs": [
       {
         "internalType": "uint256",
-        "name": "multiplierNumber",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "updateMultiplier",
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_ubuntuPerBlock",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateEmissionRate",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

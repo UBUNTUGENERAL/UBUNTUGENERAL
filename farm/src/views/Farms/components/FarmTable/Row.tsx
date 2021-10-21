@@ -142,7 +142,7 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
           <tr>
             <FarmMobileCell>
               <CellLayout>
-                <Farm {...props.farm} />
+              <Farm {...props.farm} isTokenOnly={props.details.isTokenOnly}/>
               </CellLayout>
             </FarmMobileCell>
           </tr>

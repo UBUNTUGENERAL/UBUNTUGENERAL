@@ -22,6 +22,8 @@ export interface BigNumberToJson {
   hex: string
 }
 
+
+
 export type SerializedBigNumber = string
 
 interface SerializedFarmUserData {
